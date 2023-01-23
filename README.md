@@ -12,7 +12,8 @@
 
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does as well as any other information you want users or other developers to have.}_
+ An address book application using constructors and prototypes made during Week 4 of Epicodus Coding School, "Intermediate Javascript."
+
 
 ## Setup/Installation Requirements
 
