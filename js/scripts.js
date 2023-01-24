@@ -73,6 +73,20 @@ function displayContactDetails(event) {
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
   document.querySelector("div#contact-details").removeAttribute("class");
   // console.log("The id of this <li> is " + event.target.id + "."); --this console.log was the first line of code we added to this function from the lesson plan
+
+  // The line below this one is new to help with "delete functionality". our button will need access to the id of the current contact that's being displayed. The displayContactDetails() function already has access to the Contact object's details, so let's update that function to also update our new delete button with an id attribute set to the id of the contact.
+  document.querySelector("button.delete").setAttribute("id", contact.id);
+  //we are accessing our delete button in the html and then giving it an id attribute (because in the HTML it is only assigned a class attribute)set to the Contact object's id set in the javascript. 
+  document.querySelector("div#contact-details").removeAttribute("class");
+  //our CSS class is "hidden" which we already created, and that's why the delete works, because it "hides" our info like it's supposed to.
+}
+
+
+function handleDelete(event) {
+  addressBook.deleteContact(event.target.id);//addressBook is a global variable, we can call on it from within the handleDelete() function. Remember that we're using the global addressBook variable as a mock database 
+  document.querySelector("button.delete").removeAttribute("id");//we remove the id attribute from the delete button, thereby resetting it.
+  document.querySelector("div#contact-details").setAttribute("class", "hidden");//we are hiding the contact details div once more.
+  listContacts(addressBook);//Finally, we call the listContacts function again to refresh the list of contacts, this time without the contact that we've deleted.
 }
 
 function handleFormSubmission(event) {
@@ -83,12 +97,21 @@ function handleFormSubmission(event) {
   let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
   addressBook.addContact(newContact);
   listContacts(addressBook);  // <--- This is the newer line where we call the listContacts() function and replaced our console.log *shows the full names, but not the phone number*
+  addressBook.addContact(newContact);
+  
+  document.querySelector("input#new-first-name").value = null;
+  document.querySelector("input#new-last-name").value = null;
+  document.querySelector("input#new-phone-number").value = null;
+  //code from 3 lines above empty out our form fields after submission:
 }
+
 
 //event listeners actually call the functions to make them happen (ex. handleFormSubmission and displayContactDetails)
 //function() is a stand-in for the specific function listed below, and "submit", "click" etc are the events tied to the specific functions
 window.addEventListener("load", function() { 
   document.querySelector("form#new-contact").addEventListener("submit", handleFormSubmission);
   // The line below this one is new and is related to our function displayContactDetails()
-  document.querySelector("div#contacts").addEventListener("click", displayContactDetails);  
+  document.querySelector("div#contacts").addEventListener("click", displayContactDetails); 
+  // The line below this one is new and made according to page 20 "delete functionality"
+  document.querySelector("button.delete").addEventListener("click", handleDelete);
 });
