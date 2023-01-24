@@ -48,10 +48,22 @@ Contact.prototype.fullName = function() {
 // User Interface Logic ---------
 let addressBook = new AddressBook(); //creating a nickname for a new AddressBook object
 
-function listContacts(addressBookToDisplay) {
-  
-}
 // adding this function to keep up separation of concerns. This will make a UI list function to display the objects we've taken in.
+function listContacts(addressBookToDisplay) {
+  let contactsDiv = document.querySelector("div#contacts");
+  contactsDiv.innerText =  null;
+  const ul = document.createElement("ul");
+  Object.keys(addressBookToDisplay.contacts).forEach(function(key) {
+    const contact = addressBookToDisplay.findContact(key);
+    const li = document.createElement("li");
+    li.append(contact.fullName());
+    li.setAttribute("id", contact.id);
+    ul.append(li);
+  });
+  contactsDiv.append(ul);
+}
+// example: contactsDiv.append(ul) is our single hit to the DOM *which is most EFFICIENT* as opposed to having it say something like: contactsList.append(li)
+
 
 function handleFormSubmission(event) {
   event.preventDefault();
@@ -60,7 +72,7 @@ function handleFormSubmission(event) {
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
   let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
   addressBook.addContact(newContact);
-  console.log(addressBook);
+  listContacts(addressBook);  // <--- This is the newer line where we call the listContacts() function and replaced our console.log *shows the full names, but not the phone number*
 }
 
 window.addEventListener("load", function() {
