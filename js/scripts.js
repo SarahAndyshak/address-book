@@ -64,6 +64,16 @@ function listContacts(addressBookToDisplay) {
 }
 // example: contactsDiv.append(ul) is our single hit to the DOM *which is most EFFICIENT* as opposed to having it say something like: contactsList.append(li)
 
+// this function will allow clicking on the name to show information in the console
+function displayContactDetails(event) {
+  const contact = addressBook.findContact(event.target.id); //adding our .findContact()method from our Business Logic we're cheating a bit b/c addressBook is global, which is standing in for a database
+  // .class-name #id-name . calls from class-name, # calls from id-name
+  document.querySelector(".first-name").innerText = contact.firstName;
+  document.querySelector(".last-name").innerText = contact.lastName;
+  document.querySelector(".phone-number").innerText = contact.phoneNumber;
+  document.querySelector("div#contact-details").removeAttribute("class");
+  // console.log("The id of this <li> is " + event.target.id + "."); --this console.log was the first line of code we added to this function from the lesson plan
+}
 
 function handleFormSubmission(event) {
   event.preventDefault();
@@ -75,6 +85,10 @@ function handleFormSubmission(event) {
   listContacts(addressBook);  // <--- This is the newer line where we call the listContacts() function and replaced our console.log *shows the full names, but not the phone number*
 }
 
-window.addEventListener("load", function() {
+//event listeners actually call the functions to make them happen (ex. handleFormSubmission and displayContactDetails)
+//function() is a stand-in for the specific function listed below, and "submit", "click" etc are the events tied to the specific functions
+window.addEventListener("load", function() { 
   document.querySelector("form#new-contact").addEventListener("submit", handleFormSubmission);
+  // The line below this one is new and is related to our function displayContactDetails()
+  document.querySelector("div#contacts").addEventListener("click", displayContactDetails);  
 });
