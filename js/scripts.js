@@ -30,11 +30,14 @@ AddressBook.prototype.deleteContact = function(id) {
 };
 
 // Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber) {
+function Contact(firstName, lastName, phoneNumber, emailAddress, homeAddress) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
+  this.emailAddress = emailAddress;
+  this.homeAddress = homeAddress;
 }
+//OBJECT KEYS ARE ABOVE!!
 
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
@@ -71,6 +74,8 @@ function displayContactDetails(event) {
   document.querySelector(".first-name").innerText = contact.firstName;
   document.querySelector(".last-name").innerText = contact.lastName;
   document.querySelector(".phone-number").innerText = contact.phoneNumber;
+  document.querySelector(".email-address").innerText = contact.emailAddress;
+  document.querySelector(".home-address").innerText = contact.homeAddress;
   document.querySelector("div#contact-details").removeAttribute("class");
   // console.log("The id of this <li> is " + event.target.id + "."); --this console.log was the first line of code we added to this function from the lesson plan
 
@@ -94,15 +99,19 @@ function handleFormSubmission(event) {
   const inputtedFirstName = document.querySelector("input#new-first-name").value;
   const inputtedLastName = document.querySelector("input#new-last-name").value;
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
-  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
+  const inputtedEmailAddress = document.querySelector("input#new-email-address").value;
+  const inputtedHomeAddress = document.querySelector("input#new-home-address").value;
+  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmailAddress, inputtedHomeAddress);
   addressBook.addContact(newContact);
   listContacts(addressBook);  // <--- This is the newer line where we call the listContacts() function and replaced our console.log *shows the full names, but not the phone number*
-  addressBook.addContact(newContact);
-  
+
   document.querySelector("input#new-first-name").value = null;
   document.querySelector("input#new-last-name").value = null;
   document.querySelector("input#new-phone-number").value = null;
-  //code from 3 lines above empty out our form fields after submission:
+  document.querySelector("input#new-email-address").value = null;
+  document.querySelector("input#new-home-address").value = null;
+
+  //code from the lines above are to empty out our form fields after submission.
 }
 
 
