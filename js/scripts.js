@@ -35,8 +35,21 @@ function Contact(firstName, lastName, phoneNumber, emailAddress, homeAddress) {
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
   this.emailAddress = emailAddress;
+  //this.workEmail = workEmail;
   this.homeAddress = homeAddress;
 }
+
+//This is where we were trying to figure out nesting objects
+
+// function EmailAddress(homeEmail, workEmail) {
+//   this.homeEmail = homeEmail;
+//   this.workEmail = workEmail;
+// }
+
+// function Address(homeAddress, workAddress) {
+//   this.homeAddress = homeAddress;
+//   this.workAddress = workAddress;
+// }
 //OBJECT KEYS ARE ABOVE!!
 
 Contact.prototype.fullName = function() {
@@ -100,8 +113,8 @@ function handleFormSubmission(event) {
   const inputtedLastName = document.querySelector("input#new-last-name").value;
   const inputtedPhoneNumber = document.querySelector("input#new-phone-number").value;
   const inputtedEmailAddress = document.querySelector("input#new-email-address").value;
-  const inputtedHomeAddress = document.querySelector("input#new-home-address").value;
-  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmailAddress, inputtedHomeAddress);
+  const inputtedAddress = document.querySelector("input#new-home-address").value;
+  let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, inputtedEmailAddress, inputtedAddress);
   addressBook.addContact(newContact);
   listContacts(addressBook);  // <--- This is the newer line where we call the listContacts() function and replaced our console.log *shows the full names, but not the phone number*
 
