@@ -3,6 +3,7 @@ function AddressBook() {
   this.contacts = {};
   this.currentId = 0;
 }
+// an example of a global variable mimicking a database- NOT IDEAL/DON'T REPLICATE
 
 AddressBook.prototype.addContact = function(contact) {
   contact.id = this.assignId();
@@ -60,6 +61,12 @@ Contact.prototype.fullName = function() {
 //   this.contact.phoneNumber.replace("");
 //   return this.contact.phoneNumber;
 // };
+
+// FROM MOLLY IN THE CHAT/SUGGESTED Contact.UPDATE.PROTOTYPE OPTIONS:
+// testContact.updateContact (this.phoneNumber, “888-888-8888”)
+// contact.prototype.updateContact = function(firstName, lastName, phoneNumber)
+// Contact.updateContact(phoneNumber, “888-888-8888”)
+// Contact.updateContact(phoneNumber, “888-888-8888”)
 
 // User Interface Logic ---------
 let addressBook = new AddressBook(); //creating a nickname for a new AddressBook object

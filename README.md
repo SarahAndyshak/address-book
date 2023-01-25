@@ -28,7 +28,7 @@
 * _Any known issues_
 * _should go here_
 
-* Please reach out to Sarah at sarah.andyshak@gmail.com or Eliot at eliot.lauren@gmail.com or E Luckie E Luckie <eluckie.d@gmail.com> with any questions or concerns.
+* Please reach out to Sarah at sarah.andyshak@gmail.com or Eliot at eliot.lauren@gmail.com or E Luckie eluckie.d@gmail.com with any questions or concerns.
 
 ## License
 
